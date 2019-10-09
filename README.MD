@@ -9,6 +9,11 @@
 3. speex 和speexdsp 一起集成，需要修改一些文件 fftwrap.c 需要修改把一些方法放出来
 4. arch.h 需要兼容2个的所有定义
 
+
+#### 使用
+```groovy
+  implementation 'com.github.SheTieJun:speexLib:6f9a60bc1d'
+```
 ``` java
 
     //编解码相关
