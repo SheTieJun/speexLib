@@ -4,7 +4,7 @@
 cmake_minimum_required(VERSION 3.4.1)
 set( SPEEXDSP_FLAGS "-DFIXED_POINT -DUSE_KISS_FFT -DEXPORT=\"\" -UHAVE_CONFIG_H" )
 #设置生成的so动态库最后输出的路径
-set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/../../libs/${ANDROID_ABI})
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/../jniLibs/${ANDROID_ABI})
 
 # 在执行CMAKE时打印消息 注意大小写
 # message([SEND_ERROR | STATUS | FATAL_ERROR] "message to display" ...)
