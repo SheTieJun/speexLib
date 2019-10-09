@@ -1,0 +1,2 @@
+include ':app', ':speex'
+rootProject.name='speexLib'
