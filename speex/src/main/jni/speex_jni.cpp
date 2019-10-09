@@ -14,7 +14,7 @@
 #include "stdio.h"
 
 
-#define TAG    "slack" // 这个是自定义的LOG的标识
+#define TAG    "speex" // 这个是自定义的LOG的标识
 #define LOGD(...)  __android_log_print(ANDROID_LOG_DEBUG,TAG,__VA_ARGS__) // 定义LOGD类型
 
 static int codec_open = 0;
@@ -153,9 +153,9 @@ Java_me_shetj_speex_SpeexUtils_CancelNoiseInit(JNIEnv *env, jobject instance, ji
     speex_preprocess_ctl(st, SPEEX_PREPROCESS_SET_DENOISE, &i);//降噪
     i = -25;//负的32位整数
     speex_preprocess_ctl(st, SPEEX_PREPROCESS_SET_NOISE_SUPPRESS, &i); //设置噪声的dB
-    i = 1;
+    i = 2;
     speex_preprocess_ctl(st, SPEEX_PREPROCESS_SET_AGC, &i);//增益
-    i = 24000;
+    i = 8000;
     speex_preprocess_ctl(st, SPEEX_PREPROCESS_SET_AGC_LEVEL, &i);
     i = 0;
     speex_preprocess_ctl(st, SPEEX_PREPROCESS_SET_DEREVERB, &i);
@@ -163,6 +163,13 @@ Java_me_shetj_speex_SpeexUtils_CancelNoiseInit(JNIEnv *env, jobject instance, ji
     speex_preprocess_ctl(st, SPEEX_PREPROCESS_SET_DEREVERB_DECAY, &f);
     f = .0;
     speex_preprocess_ctl(st, SPEEX_PREPROCESS_SET_DEREVERB_LEVEL, &f);
+    i = 1;
+    speex_preprocess_ctl(st, SPEEX_PREPROCESS_SET_VAD, &i); //静音检测
+    int vadProbStart = 80;
+    int vadProbContinue = 65;
+    speex_preprocess_ctl(st, SPEEX_PREPROCESS_SET_PROB_START , &vadProbStart); //Set probability required for the VAD to go from silence to voice
+    speex_preprocess_ctl(st, SPEEX_PREPROCESS_SET_PROB_CONTINUE, &vadProbContinue); //Set probability required for the VAD to stay in the voice state (integer percent)
+    LOGD("speex init");
     return 1;
 }
 
@@ -173,10 +180,19 @@ Java_me_shetj_speex_SpeexUtils_CancelNoisePreprocess(JNIEnv *env, jobject instan
 
     jbyte *inbuffer = env->GetByteArrayElements(buffer, 0);
 
-
     int vad = speex_preprocess_run(st,  (spx_int16_t*)inbuffer);
 
     env->ReleaseByteArrayElements(buffer, inbuffer, 0);
+    LOGD("speex change ok");
+    return vad;
+}
+
+JNIEXPORT jint JNICALL
+Java_me_shetj_speex_SpeexUtils_CancelNoisePreprocessByShort(JNIEnv *env, jobject instance,
+                                                     jshortArray buffer) {
+    jshort *inbuffer = env->GetShortArrayElements(buffer, 0);
+    int vad = speex_preprocess_run(st, inbuffer);
+    env->ReleaseShortArrayElements(buffer, inbuffer, 0);
     return vad;
 }
 
@@ -186,6 +202,8 @@ Java_me_shetj_speex_SpeexUtils_CancelNoiseDestroy(JNIEnv *env, jobject instance)
         speex_preprocess_state_destroy(st);
         st = NULL;
     }
+
+    LOGD("speex destory");
     return 1;
 }
 
@@ -256,6 +274,27 @@ Java_me_shetj_speex_SpeexUtils_AudioAECProc(JNIEnv *env, jobject instance, jbyte
     env->ReleaseByteArrayElements(recordArray, recordBuffer, 0);
     env->ReleaseByteArrayElements(playArray, playBuffer, 0);
     env->ReleaseByteArrayElements(szOutArray, szOutBuffer, 0);
+
+    return 1;
+}
+
+JNIEXPORT jint JNICALL
+Java_me_shetj_speex_SpeexUtils_AudioAECProcByShort(JNIEnv *env, jobject instance, jshortArray recordArray,
+                                            jshortArray playArray, jshortArray szOutArray) {
+    if (nInitSuccessFlag == 0)
+        return 0;
+
+    jshort *recordBuffer = env->GetShortArrayElements(recordArray, 0);
+    jshort *playBuffer = env->GetShortArrayElements(playArray, 0);
+    jshort *szOutBuffer = env->GetShortArrayElements(szOutArray, 0);
+
+    speex_echo_cancellation(m_pState, recordBuffer,
+                            playBuffer, szOutBuffer);
+    int flag = speex_preprocess_run(m_pPreprocessorState, szOutBuffer);
+
+    env->ReleaseShortArrayElements(recordArray, recordBuffer, 0);
+    env->ReleaseShortArrayElements(playArray, playBuffer, 0);
+    env->ReleaseShortArrayElements(szOutArray, szOutBuffer, 0);
 
     return 1;
 }

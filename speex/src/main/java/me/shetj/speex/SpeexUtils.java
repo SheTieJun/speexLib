@@ -68,12 +68,17 @@ public class SpeexUtils {
 
     public native int CancelNoisePreprocess(byte[] buffer);
 
+    public native int CancelNoisePreprocessByShort(short[] buffer);
+
     public native int CancelNoiseDestroy();
 
     //回音处理
     public native int InitAudioAEC(int frame_size,int filter_length,int sampling_rate);
 
     public native int AudioAECProc(byte[] recordArray  ,byte[] playArray  ,byte[] szOutArray);
+
+    public native int AudioAECProcByShort(short[] recordArray  ,short[] playArray  ,short[] szOutArray);
+
 
     public native int ExitSpeexDsp();
 }

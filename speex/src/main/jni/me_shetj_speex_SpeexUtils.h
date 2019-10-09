@@ -52,7 +52,7 @@ JNIEXPORT void JNICALL Java_me_shetj_speex_SpeexUtils_close
 /*
  * Class:     me_shetj_speex_SpeexUtils
  * Method:    CancelNoiseInit
- * Signature: (II)V
+ * Signature: (II)I
  */
 JNIEXPORT jint JNICALL Java_me_shetj_speex_SpeexUtils_CancelNoiseInit
   (JNIEnv *, jobject, jint, jint);
@@ -60,15 +60,23 @@ JNIEXPORT jint JNICALL Java_me_shetj_speex_SpeexUtils_CancelNoiseInit
 /*
  * Class:     me_shetj_speex_SpeexUtils
  * Method:    CancelNoisePreprocess
- * Signature: ([B)V
+ * Signature: ([B)I
  */
 JNIEXPORT jint JNICALL Java_me_shetj_speex_SpeexUtils_CancelNoisePreprocess
   (JNIEnv *, jobject, jbyteArray);
 
 /*
  * Class:     me_shetj_speex_SpeexUtils
+ * Method:    CancelNoisePreprocessByShort
+ * Signature: ([S)I
+ */
+JNIEXPORT jint JNICALL Java_me_shetj_speex_SpeexUtils_CancelNoisePreprocessByShort
+  (JNIEnv *, jobject, jshortArray);
+
+/*
+ * Class:     me_shetj_speex_SpeexUtils
  * Method:    CancelNoiseDestroy
- * Signature: ()V
+ * Signature: ()I
  */
 JNIEXPORT jint JNICALL Java_me_shetj_speex_SpeexUtils_CancelNoiseDestroy
   (JNIEnv *, jobject);
@@ -76,7 +84,7 @@ JNIEXPORT jint JNICALL Java_me_shetj_speex_SpeexUtils_CancelNoiseDestroy
 /*
  * Class:     me_shetj_speex_SpeexUtils
  * Method:    InitAudioAEC
- * Signature: (III)V
+ * Signature: (III)I
  */
 JNIEXPORT jint JNICALL Java_me_shetj_speex_SpeexUtils_InitAudioAEC
   (JNIEnv *, jobject, jint, jint, jint);
@@ -84,15 +92,23 @@ JNIEXPORT jint JNICALL Java_me_shetj_speex_SpeexUtils_InitAudioAEC
 /*
  * Class:     me_shetj_speex_SpeexUtils
  * Method:    AudioAECProc
- * Signature: ([B[B[B)V
+ * Signature: ([B[B[B)I
  */
 JNIEXPORT jint JNICALL Java_me_shetj_speex_SpeexUtils_AudioAECProc
   (JNIEnv *, jobject, jbyteArray, jbyteArray, jbyteArray);
 
 /*
  * Class:     me_shetj_speex_SpeexUtils
+ * Method:    AudioAECProcByShort
+ * Signature: ([S[S[S)I
+ */
+JNIEXPORT jint JNICALL Java_me_shetj_speex_SpeexUtils_AudioAECProcByShort
+  (JNIEnv *, jobject, jshortArray, jshortArray, jshortArray);
+
+/*
+ * Class:     me_shetj_speex_SpeexUtils
  * Method:    ExitSpeexDsp
- * Signature: ()V
+ * Signature: ()I
  */
 JNIEXPORT jint JNICALL Java_me_shetj_speex_SpeexUtils_ExitSpeexDsp
   (JNIEnv *, jobject);
