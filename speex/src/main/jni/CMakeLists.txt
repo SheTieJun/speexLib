@@ -2,7 +2,7 @@
 # library. You should either keep the default value or only pass a
 # value of 3.4.0 or lower.
 cmake_minimum_required(VERSION 3.4.1)
-
+set( SPEEXDSP_FLAGS "-DFIXED_POINT -DUSE_KISS_FFT -DEXPORT=\"\" -UHAVE_CONFIG_H" )
 #设置生成的so动态库最后输出的路径
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/../libs/${ANDROID_ABI})
 
@@ -16,7 +16,7 @@ message(STATUS "Android API LEVEL: ${ANDROID_NATIVE_API_LEVEL}")
 # 添加头文件目录,指定头文件与库文件路径 include_directories与link_directories 可以多次调用以设置多个路径
 include_directories("include")
 
-file(GLOB_RECURSE ALL_PROJ_SRC "libspeex/*.c" "speex_jni.cpp")
+file(GLOB_RECURSE ALL_PROJ_SRC "libspeex/*.c"  "speex_jni.cpp")
 
 # Creates and names a library, sets it as either STATIC
 # or SHARED, and provides the relative paths to its source code.

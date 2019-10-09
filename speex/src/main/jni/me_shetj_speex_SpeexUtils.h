@@ -49,6 +49,54 @@ JNIEXPORT jint JNICALL Java_me_shetj_speex_SpeexUtils_encode
 JNIEXPORT void JNICALL Java_me_shetj_speex_SpeexUtils_close
   (JNIEnv *, jobject);
 
+/*
+ * Class:     me_shetj_speex_SpeexUtils
+ * Method:    CancelNoiseInit
+ * Signature: (II)V
+ */
+JNIEXPORT jint JNICALL Java_me_shetj_speex_SpeexUtils_CancelNoiseInit
+  (JNIEnv *, jobject, jint, jint);
+
+/*
+ * Class:     me_shetj_speex_SpeexUtils
+ * Method:    CancelNoisePreprocess
+ * Signature: ([B)V
+ */
+JNIEXPORT jint JNICALL Java_me_shetj_speex_SpeexUtils_CancelNoisePreprocess
+  (JNIEnv *, jobject, jbyteArray);
+
+/*
+ * Class:     me_shetj_speex_SpeexUtils
+ * Method:    CancelNoiseDestroy
+ * Signature: ()V
+ */
+JNIEXPORT jint JNICALL Java_me_shetj_speex_SpeexUtils_CancelNoiseDestroy
+  (JNIEnv *, jobject);
+
+/*
+ * Class:     me_shetj_speex_SpeexUtils
+ * Method:    InitAudioAEC
+ * Signature: (III)V
+ */
+JNIEXPORT jint JNICALL Java_me_shetj_speex_SpeexUtils_InitAudioAEC
+  (JNIEnv *, jobject, jint, jint, jint);
+
+/*
+ * Class:     me_shetj_speex_SpeexUtils
+ * Method:    AudioAECProc
+ * Signature: ([B[B[B)V
+ */
+JNIEXPORT jint JNICALL Java_me_shetj_speex_SpeexUtils_AudioAECProc
+  (JNIEnv *, jobject, jbyteArray, jbyteArray, jbyteArray);
+
+/*
+ * Class:     me_shetj_speex_SpeexUtils
+ * Method:    ExitSpeexDsp
+ * Signature: ()V
+ */
+JNIEXPORT jint JNICALL Java_me_shetj_speex_SpeexUtils_ExitSpeexDsp
+  (JNIEnv *, jobject);
+
 #ifdef __cplusplus
 }
 #endif
