@@ -52,7 +52,7 @@ public class SpeexUtils {
         }
         return speexUtil;
     }
-
+    //编解码相关
     public native int open(int compression);
 
     public native int getFrameSize();
@@ -64,16 +64,16 @@ public class SpeexUtils {
     public native void close();
 
     //噪音处理
-    public native int CancelNoiseInit(int frame_size,int sample_rate);//初始化
+    public native int CancelNoiseInit(int frame_size,int sample_rate);
 
     public native int CancelNoisePreprocess(byte[] buffer);
 
-    public native int CancelNoiseDestroy();//退出
+    public native int CancelNoiseDestroy();
 
     //回音处理
-    public native int InitAudioAEC(int frame_size,int filter_length,int sampling_rate);//初始化
+    public native int InitAudioAEC(int frame_size,int filter_length,int sampling_rate);
 
     public native int AudioAECProc(byte[] recordArray  ,byte[] playArray  ,byte[] szOutArray);
 
-    public native int ExitSpeexDsp();//退出
+    public native int ExitSpeexDsp();
 }
