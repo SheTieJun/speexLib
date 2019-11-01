@@ -1,4 +1,4 @@
-## Speex 集成 
+## Speex & SpeexDsp集成 
 
 ##### 集成方式cmake 
 
@@ -11,9 +11,7 @@
 
 
 #### 使用
-```groovy
-  implementation 'com.github.SheTieJun:speexLib:6f9a60bc1d'
-```
+ 
 ``` java
 
     //编解码相关
