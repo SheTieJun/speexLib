@@ -11,7 +11,10 @@
 
 
 #### 使用
- 
+ [![](https://jitpack.io/v/SheTieJun/speexLib.svg)](https://jitpack.io/#SheTieJun/speexLib)
+ ```
+   implementation 'com.github.SheTieJun:speexLib:4b2e84a678'
+```
 ``` java
 
     //编解码相关
