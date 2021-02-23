@@ -42,3 +42,6 @@
 
     public native int ExitSpeexDsp();
 ```
+
+## tips
+没有经过测试，请勿直接用到项目中
